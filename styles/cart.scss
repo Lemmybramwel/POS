@@ -1,0 +1,240 @@
+:root{
+   --page_padding: 0;
+   --page-margin: 0;
+   --box-sizing: border-box;
+   --page-background: #232627;
+   --color-orange: rgb(66, 65, 64);
+   --font-family: sans-serif;
+   --text-color: rgb(204, 203, 203);
+}
+*{ 
+   padding: var(--page_padding);
+   margin: var(--page-margin);
+   box-sizing: var(--box-sizing);
+   color: var(--page-color);
+   text-decoration: none;
+   outline: none;
+   border: none;
+   scroll-behavior: smooth;
+   list-style: none;
+   overflow-x: hidden;
+   font-family: var(--font-family);
+}
+body{
+   width: 100%;
+   height: 100vh;
+   overflow-x: hidden;
+   background: var(--page-background);
+} 
+i.fas{
+   color: white;
+   font-size: 14px;
+}
+
+/*## scroll bar styles ##*/
+::-webkit-scrollbar{
+   width: 3px;
+   background: gray;
+ }
+ ::-webkit-scrollbar-button{
+   background: rgb(175, 171, 171);
+ }
+ ::-webkit-scrollbar-thumb{
+   background:  rgb(179, 176, 176);
+}
+
+// Hide the increment and decrement buttons 
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+ -webkit-appearance: none !important;
+ appearance: none !important;
+ visibility: hidden !important;
+ margin: 0; 
+}
+
+section.main-content{
+   header.page-header{
+      width: 100%;
+      padding: 4px 5%;
+      height: 6rem;
+      align-items: center;
+      display: flex;
+      justify-content: space-between;
+      z-index: 99999;
+      -webkit-backdrop-filter: blur(15px);
+      backdrop-filter: blur(15px);
+      position: fixed;
+      top: 0;
+      left: 0;
+      background: #8b8a8a21;
+      margin-top: 15px;
+
+      // mixin
+      @mixin item_size($height){
+      height: $height;
+      }
+      div.img-wrapper > a > img{
+         // usage
+         @include item_size(85px - 5);
+      }
+
+      div.cashier_name{
+         color: #eaeaea;
+         font-size: 12.5px;
+         cursor: pointer;
+         text-transform: capitalize;
+
+         i.fas{
+            position: relative;
+            top: 3px;
+         }
+
+         a.cashier_logout{
+            position: absolute;
+            bottom: 1rem;
+            visibility: hidden;
+            transform: translate(0, 13px);
+            right: 51px;
+            background: rgb(117, 117, 223);
+            padding: 4px 8px;
+            font-size: 10.5px;
+            box-shadow: 1px 1px 5px rgba(51, 50, 50, 0.925);;
+            border-radius: .1rem;
+
+            &.active{
+               visibility: visible;
+               transform: translate(0, 9px);
+               transition: ease-in .2s;
+            }
+         }
+      }
+   }
+
+   section.cart-section{
+      position: relative;
+      z-index: 999;
+      overflow: hidden;
+      margin-top: 30vh;
+      width: 100%;
+      -webkit-transform: translate(10.5%,0);
+      transform: translate(10.5%,0);
+
+      // text input
+      input[type="text"].bar_code{
+         // mixin
+         @mixin text-input($height,$width,$padding,$border-radius,$letter-spacing,$background,$color,$font-size){
+            height: $height;
+            width: $width;
+            padding: $padding;
+            border-radius: $border-radius;
+            letter-spacing: $letter-spacing;
+            background: $background;
+            color: $color;
+            font-size: $font-size;  
+         }
+         // usage
+         @include text-input(3rem, 35%, 1.5rem 2%, 5px, 1px, none, #eaeaea, 12.2px);
+         border: 2px solid var(--color-orange);
+         font-family: var(--font-family);
+
+         &::placeholder{
+            color: var(--text-color);
+            font-size: 12.2px;
+         } 
+      }
+    
+      div.cart-wrapper{
+        display: flex;
+        gap: 2rem;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        width: 35%;
+        padding-top: 18px;
+        border-top: 1.1px solid rgb(78, 75, 72);
+
+        .product{
+         color: #eee;
+         font-size: 13px;
+         height: auto;
+         border-radius: .5rem;
+         text-align: center;
+         width: auto;
+         cursor: pointer;
+         padding: 15px 2rem;
+         box-shadow: 1px 1px 4rem rgb(58, 57, 57);
+         display: inline;
+         align-items: center;
+         position: relative;
+         background: var(--color-orange);
+
+         &:hover{
+            transform: scale(0.9);
+            transition: ease-in .2s;
+         }
+         span{
+            font-size:  11px !important;
+         }
+        }
+      }
+      samp.title{
+         position: relative;
+         margin-top: 4rem;
+         font-size: 14px;
+         color: var(--text-color);
+      }
+      form{
+         input[type="number"]{
+            width: 11rem;
+            border-radius: .2rem;
+            color: var(--text-color);
+            border: 1.1px solid rgb(63, 62, 62);
+            padding: 12px 10px;
+            font-size: 12.1px;
+            background: none;
+            box-shadow: 2px 1px 2rem rgb(48, 46, 46);
+
+            &::placeholder{
+               font-size: inherit;
+               color: var(--text-color);
+            }
+         }
+
+         span.payment-label{
+            color: var(--text-color);
+            font-size: 12.2px;
+          }
+         button[type="submit"].clear-cart{
+            background: rgb(116, 116, 226);
+            cursor: pointer;
+            font-size: 12.1px;
+            color: #eee;
+            padding: 1rem 3rem; 
+            width: 9.5rem;
+            border-radius: .2rem;
+            display: flex;
+            justify-content: space-between;
+        }
+      }
+
+   footer.footer{
+   // mixin
+   @mixin footer($padding-top,$display,$position,$right,$color,$font-size) {
+      padding-top: $padding-top;
+      display: $display;
+      position: $position;
+      margin-right: $right;
+      color: $color;
+      font-size: $font-size;
+   }
+
+   // usage
+   @include footer(4px + 3, inline, relative, 2rem, rgb(231, 96, 34), 12.1px);
+   border-top: 1px dashed rgb(216, 215, 215);
+
+   span{
+      color: rgb(216, 215, 215);
+      font-size: inherit;
+   }
+ }
+}
+}
